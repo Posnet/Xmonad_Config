@@ -1,0 +1,23 @@
+Config { font = "xft:Incosolata:style=Medium:size=12:antialias=true"
+       , bgColor  = "midnight blue"
+       , fgColor  = "white"
+       --, alpha    = 255
+       , position = TopW L 90
+       , commands = [ Run Weather "EGPF" ["-t"," <tempC> C","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run Cpu  ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %b %_d %k:%M:%S" "date" 5
+                    , Run StdinReader
+                    , Run Com "~/.xmobar/volume_display.sh" [] "Volume" 1
+                    , Run Com "~/.xmobar/get_temps.sh" [] "Temp_Custom" 30
+                    , Run Com "~/.xmobar/get_fan.sh" [] "Fan" 1
+                    , Run Network "enp2s0f0" ["-L","0","-H","1000","--normal","green","--high","red"] 10
+                    , Run Com "uname" ["-s", "-r"]"" 36000
+                    , Run Com "~/.xmobar/get_music.sh" [] "Music" 5
+                    --, Run ThermalZone 0 ["-t","<id>: <temp>C"] 30
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%uname% | %StdinReader% }{%Music% |%cpu% %Temp_Custom%C  %Fan%| %memory% | %enp2s0f0% | %Volume% | <fc=#ee9a00>%date%</fc> "
+       }
